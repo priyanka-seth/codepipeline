@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "install phase (CodeBuild)"
+  build:
+    commands:
+      - echo "build phase - preparing artifact"
+      - chmod +x scripts/*.sh
+      - mkdir -p deploy
+      - cp -r index.js package.json appspec.yml scripts deploy/
+artifacts:
+  files:
+    - appspec.yml
+    - index.js
+    - package.json
+    - scripts/**/*
+  discard-paths: no
